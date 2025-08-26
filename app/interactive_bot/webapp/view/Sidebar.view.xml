@@ -1,0 +1,22 @@
+<mvc:View
+  controllerName="interactivebot.controller.Sidebar"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page id="_IDGenPage" showFooter="true">
+    <customHeader>
+      <Bar id="_IDGenBar1">
+        <contentMiddle>
+          <HBox id="_IDGenHBox2" width="100%" justifyContent="Center">
+            <Button id="_IDGenButton" icon="sap-icon://add" text="New Chat" press="onNewChat"/>
+          </HBox>
+        </contentMiddle>
+      </Bar>
+    </customHeader>
+
+    <content>
+      <List id="_IDGenList" mode="SingleSelectMaster" itemPress="onSessionSelect" width="100%" growing="true"/>
+    </content>
+
+  </Page>
+</mvc:View>

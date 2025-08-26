@@ -1,0 +1,119 @@
+<mvc:View
+    controllerName="interactivebot.controller.Worklist"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:Table="sap.ui.table">
+
+    <Page id="worklistPage" class="sapUiContentPadding">
+
+        <!-- Card container -->
+        <VBox id="_IDGenVBox" fitContainer="true" class="worklistCard">
+
+            <!-- Global Header -->
+            <Toolbar id="_IDGenToolbar" design="Transparent" class="sapUiMediumMarginBottom">
+                <Title id="_IDGenTitle" text="Log Items" level="H2" />
+                <ToolbarSpacer id="_IDGenToolbarSpacer" />
+
+                <!-- Ask Bot button -->
+                <Button id="_IDGenButton1" text="Ask Bot" icon="sap-icon://ai" type="Emphasized" press="onAskBot"/>
+
+                <!-- Export Menu -->
+                <MenuButton id="_IDGenMenuButton" text="Export" icon="sap-icon://share" type="Transparent" tooltip="Export Options">
+                    <Menu id="_IDGenMenu">
+                        <MenuItem id="_IDGenMenuItem" text="Export to Excel" icon="sap-icon://excel-attachment" press="onExportExcel"/>
+                    </Menu>
+                </MenuButton>
+
+                <!-- Sort Menu -->
+                <!-- <MenuButton id="_IDGenMenuButton1" text="Sort" icon="sap-icon://sort" type="Transparent" tooltip="Sort Options">
+                    <Menu id="_IDGenMenu1">
+                        <MenuItem id="_IDGenMenuItem2" text="Sort by Date" icon="sap-icon://sort-ascending" press="onSortDate"/>
+                        <MenuItem id="_IDGenMenuItem3" text="Sort by User" icon="sap-icon://sort-descending" press="onSortUser"/>
+                    </Menu>
+                </MenuButton> -->
+            </Toolbar>
+
+            <!-- Filter Toolbar -->
+            <Toolbar id="_IDGenToolbar1" design="Info" class="sapUiTinyMarginBottom filterBar">
+                <Label id="_IDGenLabel" text="Log Number" labelFor="filterLogNumber"/>
+                <Input id="filterLogNumber" width="12rem" liveChange="onFilterChange" />
+
+                <Label id="_IDGenLabel1" text="User" labelFor="filterUser" class="sapUiSmallMarginBegin"/>
+                <Input id="filterUser" width="12rem" liveChange="onFilterChange" />
+
+                <Label id="_IDGenLabel2" text="Date" labelFor="filterDate" class="sapUiSmallMarginBegin"/>
+                <DatePicker id="filterDate" width="12rem" change="onFilterChange" />
+
+                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                <Button id="_IDGenButton2" text="Clear" icon="sap-icon://clear-filter" type="Transparent" press="onClearFilters"/>
+            </Toolbar>
+
+            <!-- Table inside card -->
+            <VBox id="_IDGenVBox1" class="sapUiNoContentPadding">
+                <Table:Table
+                    id="worklistTable"
+                    rows="{/WorklistItems}"
+                    selectionMode="Single"
+                    selectionBehavior="RowSelector"                  
+                    showNoData="true"
+                    enableColumnReordering="true"
+                    width="100%"                 
+                    class="sapUiSizeCompact"
+                    >
+
+                    <Table:columns>
+                        <Table:Column id="_IDGenColumn1" label="Log Number" width="12rem">
+                            <Table:template>
+                                <Text id="_IDGenText" text="{lognumber}" />
+                            </Table:template>
+                        </Table:Column>
+
+                        <Table:Column id="_IDGenColumn8" label="Text" width="20rem">
+                            <Table:template>
+                                <Text id="_IDGenText7" text="{text}" />
+                            </Table:template>
+                             </Table:Column>
+
+                        <Table:Column id="_IDGenColumn5" label="Date" width="8rem" hAlign="Center">
+                            <Table:template>
+                                <Text id="_IDGenText4" text="{aldate}" />
+                            </Table:template>
+                        </Table:Column>
+
+                        <Table:Column id="_IDGenColumn6" label="Time" width="8rem" hAlign="Center">
+                            <Table:template>
+                                <Text id="_IDGenText5" text="{altime}" />
+                            </Table:template>
+                        </Table:Column>
+
+                        <Table:Column id="_IDGenColumn7" label="User" width="10rem">
+                            <Table:template>
+                                <Text id="_IDGenText6" text="{aluser}" />
+                            </Table:template>
+                        </Table:Column>
+
+                        
+                         <Table:Column id="_IDGenColumn2" label="Object" width="10rem">
+                            <Table:template>
+                                <Text id="_IDGenText1" text="{object}" />
+                            </Table:template>
+                        </Table:Column>
+
+                        <Table:Column id="_IDGenColumn3" label="Subobject" width="15rem">
+                            <Table:template>
+                                <Text id="_IDGenText2" text="{subobject}" />
+                            </Table:template>
+                        </Table:Column>
+
+                        <Table:Column id="_IDGenColumn4" label="External Number" width="15rem">
+                            <Table:template>
+                                <Text id="_IDGenText3" text="{extnumber}" />
+                            </Table:template>
+                        </Table:Column>
+                       
+                    </Table:columns>
+                </Table:Table>
+            </VBox>
+        </VBox>
+    </Page>
+</mvc:View>

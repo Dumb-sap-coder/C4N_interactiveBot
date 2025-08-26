@@ -1,0 +1,66 @@
+{
+  "name": "interactive_bot1",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.15.3",
+    "@cap-js/hana": "^2",
+    "@sap-cloud-sdk/connectivity": "^3",
+    "@sap-cloud-sdk/http-client": "^4.1.1",
+    "@sap-cloud-sdk/resilience": "^3",
+    "@sap-cloud-sdk/util": "^4.1.1",
+    "@sap/cds": "^9",
+    "@sap/low-code-event-handler": "^1.2.5",
+    "@sap/xsenv": ">=3.3.2 <3.3.3",
+    "@sap/xssec": "^4.9.1",
+    "express": "^4",
+    "hdb": "^2.25.1",
+    "passport": "^0.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.13.0",
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": ">=8",
+    "@sap/dev-cap-tools": "^1.31.0"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "start-local": "npm run generate-entry-point && npm run cds-watch",
+    "generate-entry-point": "dev-cap-tools gen-entrypoint",
+    "cds-watch": "cds watch --open",
+    "watch-interactive_bot": "cds watch --open interactive_bot/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      },
+      "auth": {
+        "[development]": {
+          "kind": "dummy"
+        },
+        "[production]": {
+          "kind": "xsuaa"
+        }
+      },
+      "requires": {
+        "ZNB_APPL_LOG_SRV_01": {
+          "kind": "odata-v2",
+          "model": "srv/external/ZNB_APPL_LOG_SRV_01",
+          "credentials": {
+            "destination": "SGD",
+            "path": "/sap/opu/odata/sap/ZNB_APPL_LOG_SRV_01"
+          }
+        }
+      }
+    }
+  },
+  "lcap": true
+}

@@ -1,0 +1,17 @@
+<mvc:View
+  controllerName="interactivebot.controller.Chatbot"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  displayBlock="false" >
+
+   <SplitApp id="Chatapp"  class="sapUiResponsiveContentPadding">
+  <masterPages>
+    <mvc:XMLView id="_IDGenXMLView1" viewName="interactivebot.view.Sidebar" />
+  </masterPages>
+
+  <detailPages>
+    <mvc:XMLView id="_IDGenXMLView2" viewName="interactivebot.view.ChatContainer" />
+  </detailPages>
+  </SplitApp>
+</mvc:View>

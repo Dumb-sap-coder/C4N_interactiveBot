@@ -1,0 +1,144 @@
+{
+  "_version": "1.76.0",
+  "sap.app": {
+    "id": "interactivebot",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.18.5",
+      "toolsId": "5aea4a67-fc2e-4e5f-9621-32a6487e6131"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/worklist/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "interactive-chatbot": {
+          "semanticObject": "interactive",
+          "action": "chatbot",
+          "title": "{{interactive-chatbot.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.139.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "interactivebot.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ],
+      "js": [
+        {
+          "uri": "libs/marked.min.js"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "interactivebot.view",
+        "async": true,
+        "viewPath": "interactivebot.view"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "worklist",
+          "target": "worklist"
+        },
+        {
+          "pattern": "chatbot",
+          "name": "chatbot",
+          "target": "chatbot"
+        }
+      ],
+      "targets": {
+        "worklist": {
+          "viewName": "Worklist",
+          "viewId": "Worklist",
+          "viewLevel": 1
+        },
+        "chatbot": {
+          "viewName": "Chatbot",
+          "viewId": "Chatbot",
+          "viewLevel": 2
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "interactivebot.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}
