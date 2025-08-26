@@ -50,7 +50,7 @@
           "kind": "xsuaa"
         }
       },
-      "requires": {
+      
         "ZNB_APPL_LOG_SRV_01": {
           "kind": "odata-v2",
           "model": "srv/external/ZNB_APPL_LOG_SRV_01",
@@ -58,7 +58,7 @@
             "destination": "SGD",
             "path": "/sap/opu/odata/sap/ZNB_APPL_LOG_SRV_01"
           }
-        }
+        
       }
     }
   },
