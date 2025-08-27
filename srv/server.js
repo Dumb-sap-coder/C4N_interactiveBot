@@ -70,11 +70,11 @@
 //     return { count: mapped.length };
 //   });
 // });
-const cds = require('@sap/cds');
+// const cds = require('@sap/cds');
 
-cds.on('served', async () => {
-  const external = await cds.connect.to('ZNB_APPL_LOG_SRV_01');
-  const result = await external.run(SELECT.from('applogset').limit(5));
-  console.log('Sample external call:', result);
-});
+// cds.on('served', async () => {
+//   const external = await cds.connect.to('ZNB_APPL_LOG_SRV_01');
+//   const result = await external.run(SELECT.from('applogset').limit(5));
+//   console.log('Sample external call:', result);
+// });
 

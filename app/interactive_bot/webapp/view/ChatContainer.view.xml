@@ -5,13 +5,13 @@
   xmlns:layout="sap.ui.layout"
   displayBlock="true">
 
-  <Page id="_IDchatPage" enableScrolling="false">
+  <Page id="_IDchatPage" enableScrolling="false" >
 
     <!-- VBox flex container -->
     <VBox id="mainVBox" class="chatMainVBox" fitContainer="true">
 
       <ScrollContainer
-        id="_IDGenScrollContainer1"
+        id="chatScroll"
         height="90%"
         width="100%"
         vertical="true"

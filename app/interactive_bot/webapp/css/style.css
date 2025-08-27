@@ -27,13 +27,14 @@
   white-space: nowrap;
 }
 
-
   /* VBox layout stretching */
-html, body, .sapUiBody, .sapMApp, .sapMPage {
-    height: 100%;
+html, body, .sapUiBody, #content, .sapMApp, .sapMSplitApp {
+    height: 100% !important;
+    width: 100% !important;
     margin: 0;
     padding: 0;
 }
+
   
   /* Footer styling, NO fixed position */
 .chatFooterBar {
@@ -154,7 +155,6 @@ html, body, .sapUiBody, .sapMApp, .sapMPage {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 /* Capsule input wrapper */

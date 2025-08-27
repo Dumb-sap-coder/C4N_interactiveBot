@@ -8,7 +8,6 @@ sap.ui.define([
 
     return Controller.extend("interactivebot.controller.Worklist", {
 
-
         onInit: function () {
             // Dummy data
             const aDummyLogs = [
@@ -49,33 +48,32 @@ sap.ui.define([
 
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
-            // Navigate to the Chatbot view at app level
-            oRouter.navTo("chatbot"); // <-- entire app navigation
+            // Navigate to the Chatbot view
+            oRouter.navTo("chatbot"); 
 
-            // After navigation, publish EventBus
+            // After navigation, delay EventBus publish slightly
             const bus = sap.ui.getCore().getEventBus();
 
             if (oData) {
-                // Row selected → create session and send text
                 const sessionId = "session_" + Date.now();
-                bus.publish("chat", "loadSessionWithText", {
-                    sessionId,
-                    text: oData.text,
-                    rowData: oData
-                });
+                setTimeout(() => {
+                    bus.publish("chat", "loadSessionWithText", {
+                        sessionId,
+                        text: oData.text,
+                        rowData: oData
+                    });
+                }, 300); 
             } else {
-                // No row selected → empty chat container
-                bus.publish("chat", "resetChatContainer");
+                setTimeout(() => {
+                    bus.publish("chat", "resetChatContainer");
+                });
             }
         },
-
-
 
         onExportExcel: function () {
             const oTable = this.byId("worklistTable");
             const oBinding = oTable.getBinding("rows");
 
-            // Define column configuration
             const aCols = [
                 { label: "Log Number", property: "lognumber" },
                 { label: "Object", property: "object" },
@@ -87,7 +85,6 @@ sap.ui.define([
                 { label: "Text", property: "text" }
             ];
 
-            // Export settings
             const oSettings = {
                 workbook: { columns: aCols },
                 dataSource: oBinding,
@@ -96,9 +93,41 @@ sap.ui.define([
 
             const oSheet = new Spreadsheet(oSettings);
             oSheet.build().finally(() => oSheet.destroy());
+        },
+
+        onFilterChange: function () {
+            const oTable = this.byId("worklistTable");
+            const oBinding = oTable.getBinding("rows");
+
+            const aFilters = [];
+
+            const sLog = this.byId("filterLogNumber").getValue();
+            const sUser = this.byId("filterUser").getValue();
+            const dDate = this.byId("filterDate").getDateValue();
+
+            if (sLog) {
+                aFilters.push(new sap.ui.model.Filter("lognumber", sap.ui.model.FilterOperator.Contains, sLog));
+            }
+            if (sUser) {
+                aFilters.push(new sap.ui.model.Filter("aluser", sap.ui.model.FilterOperator.Contains, sUser));
+            }
+            if (dDate) {
+                const sDateStr = dDate.toISOString().split("T")[0];
+                aFilters.push(new sap.ui.model.Filter("aldate", sap.ui.model.FilterOperator.EQ, sDateStr));
+            }
+
+            oBinding.filter(aFilters);
+        },
+
+        onClearFilters: function () {
+            this.byId("filterLogNumber").setValue("");
+            this.byId("filterUser").setValue("");
+            this.byId("filterDate").setValue(null);
+
+            const oTable = this.byId("worklistTable");
+            const oBinding = oTable.getBinding("rows");
+            oBinding.filter([]); 
         }
-
-
 
     });
 });

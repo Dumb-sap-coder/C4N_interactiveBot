@@ -3,9 +3,9 @@
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   xmlns:layout="sap.ui.layout"
-  displayBlock="false" >
+  displayBlock="true" >
 
-   <SplitApp id="Chatapp"  class="sapUiResponsiveContentPadding">
+   <SplitApp id="Chatapp" >
   <masterPages>
     <mvc:XMLView id="_IDGenXMLView1" viewName="interactivebot.view.Sidebar" />
   </masterPages>

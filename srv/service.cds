@@ -1,4 +1,4 @@
-using { ZNB_APPL_LOG_SRV_01 as externalLogs } from './external/ZNB_APPL_LOG_SRV_01.cds'; 
+using { ZNB_APPL_LOG_SRV_01  } from './external/ZNB_APPL_LOG_SRV_01.cds'; 
 using { interactive_bot as ib } from '../db/schema.cds';
 
 // @path : '/external'
@@ -6,9 +6,9 @@ using { interactive_bot as ib } from '../db/schema.cds';
 //     entity ApplLogs as projection on externalLogs.applogSet;
 // }
 
-// @path : '/worklist'
+ //@path : '/worklist'
 service WorklistService {
-    entity WorklistItems as projection on externalLogs.applogSet;
+    entity WorklistItems as projection on ZNB_APPL_LOG_SRV_01.applogSet;
     // entity WorklistItems as projection on ib.WorklistItems;
 }
 

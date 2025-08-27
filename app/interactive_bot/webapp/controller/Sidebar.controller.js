@@ -7,6 +7,8 @@ sap.ui.define([
     return Controller.extend("interactivebot.controller.Sidebar", {
         onInit() {
             this.getOwnerComponent().getRouter().navTo("nochat");
+            this._appId = this.getOwnerComponent().getManifestEntry("sap.app").id; 
+                  this._storageKey = this._appId + "_chatSessions"; 
             this._loadChatList();
             sap.ui.getCore().getEventBus().subscribe("chat", "sessionUpdated", this._loadChatList, this);
             //sap.ui.getCore().getEventBus().publish("chat", "forceReset");
@@ -16,7 +18,7 @@ sap.ui.define([
             const oList = this.byId("_IDGenList");
             oList.removeAllItems();
 
-            const sessions = JSON.parse(localStorage.getItem("chatSessions") || "{}");
+            const sessions = JSON.parse(localStorage.getItem(this._storageKey) || "{}");
 
             Object.keys(sessions).reverse().forEach(sessionId => {
                 const title = sessions[sessionId].title || "New Chat";

@@ -4,7 +4,7 @@
     xmlns="sap.m"
     xmlns:Table="sap.ui.table">
 
-    <Page id="worklistPage" class="sapUiContentPadding">
+    <Page id="worklistPage" >
 
         <!-- Card container -->
         <VBox id="_IDGenVBox" fitContainer="true" class="worklistCard">
@@ -49,70 +49,101 @@
             </Toolbar>
 
             <!-- Table inside card -->
-            <VBox id="_IDGenVBox1" class="sapUiNoContentPadding">
-                <Table:Table
-                    id="worklistTable"
-                    rows="{/WorklistItems}"
-                    selectionMode="Single"
-                    selectionBehavior="RowSelector"                  
-                    showNoData="true"
-                    enableColumnReordering="true"
-                    width="100%"                 
-                    class="sapUiSizeCompact"
-                    >
+            <VBox id="_IDGenVBox1" >
+               <Table:Table
+    id="worklistTable"
+    rows="{/WorklistItems}"
+    selectionMode="Single"
+    selectionBehavior="RowSelector"
+    showNoData="true"
+    enableColumnFreeze="true"
+    enableColumnReordering="true"
+    width="100%"
+    class="sapUiSizeCompact">
 
-                    <Table:columns>
-                        <Table:Column id="_IDGenColumn1" label="Log Number" width="12rem">
-                            <Table:template>
-                                <Text id="_IDGenText" text="{lognumber}" />
-                            </Table:template>
-                        </Table:Column>
+    <Table:columns>
+        <Table:Column 
+            id="_IDGenColumn1" 
+            label="Log Number" 
+            width="12rem" 
+            sortProperty="lognumber"
+            filterProperty="lognumber">
+            <Table:template>
+                <Text id="_IDGenText1" text="{lognumber}" />
+            </Table:template>
+        </Table:Column>
 
-                        <Table:Column id="_IDGenColumn8" label="Text" width="20rem">
-                            <Table:template>
-                                <Text id="_IDGenText7" text="{text}" />
-                            </Table:template>
-                             </Table:Column>
+        <Table:Column 
+            id="_IDGenColumn8" 
+            label="Text" 
+            width="20rem" >
+            <Table:template>
+                <Text id="_IDGenText2" text="{text}" />
+            </Table:template>
+        </Table:Column>
 
-                        <Table:Column id="_IDGenColumn5" label="Date" width="8rem" hAlign="Center">
-                            <Table:template>
-                                <Text id="_IDGenText4" text="{aldate}" />
-                            </Table:template>
-                        </Table:Column>
+        <Table:Column 
+            id="_IDGenColumn5" 
+            label="Date" 
+            width="8rem" 
+            hAlign="Center"
+            sortProperty="aldate"
+            filterProperty="aldate">
+            <Table:template>
+                <Text id="_IDGenText3" text="{aldate}" />
+            </Table:template>
+        </Table:Column>
 
-                        <Table:Column id="_IDGenColumn6" label="Time" width="8rem" hAlign="Center">
-                            <Table:template>
-                                <Text id="_IDGenText5" text="{altime}" />
-                            </Table:template>
-                        </Table:Column>
+        <Table:Column 
+            id="_IDGenColumn6" 
+            label="Time" 
+            width="8rem" 
+            hAlign="Center">
+            <Table:template>
+                <Text id="_IDGenText4" text="{altime}" />
+            </Table:template>
+        </Table:Column>
 
-                        <Table:Column id="_IDGenColumn7" label="User" width="10rem">
-                            <Table:template>
-                                <Text id="_IDGenText6" text="{aluser}" />
-                            </Table:template>
-                        </Table:Column>
+        <Table:Column 
+            id="_IDGenColumn7" 
+            label="User" 
+            width="10rem"
+            sortProperty="aluser"
+            filterProperty="aluser">
+            <Table:template>
+                <Text id="_IDGenText5" text="{aluser}" />
+            </Table:template>
+        </Table:Column>
 
-                        
-                         <Table:Column id="_IDGenColumn2" label="Object" width="10rem">
-                            <Table:template>
-                                <Text id="_IDGenText1" text="{object}" />
-                            </Table:template>
-                        </Table:Column>
+        <Table:Column 
+            id="_IDGenColumn2" 
+            label="Object" 
+            width="10rem">
+            <Table:template>
+                <Text id="_IDGenText6" text="{object}" />
+            </Table:template>
+        </Table:Column>
 
-                        <Table:Column id="_IDGenColumn3" label="Subobject" width="15rem">
-                            <Table:template>
-                                <Text id="_IDGenText2" text="{subobject}" />
-                            </Table:template>
-                        </Table:Column>
+        <Table:Column 
+            id="_IDGenColumn3" 
+            label="Subobject" 
+            width="15rem">
+            <Table:template>
+                <Text id="_IDGenText7" text="{subobject}" />
+            </Table:template>
+        </Table:Column>
 
-                        <Table:Column id="_IDGenColumn4" label="External Number" width="15rem">
-                            <Table:template>
-                                <Text id="_IDGenText3" text="{extnumber}" />
-                            </Table:template>
-                        </Table:Column>
-                       
-                    </Table:columns>
-                </Table:Table>
+        <Table:Column 
+            id="_IDGenColumn4" 
+            label="External Number" 
+            width="15rem">
+            <Table:template>
+                <Text id="_IDGenText8" text="{extnumber}" />
+            </Table:template>
+        </Table:Column>
+    </Table:columns>
+</Table:Table>
+
             </VBox>
         </VBox>
     </Page>

@@ -25,7 +25,9 @@ sap.ui.define([
 
     return Controller.extend("interactivebot.controller.ChatContainer", {
         onInit() {
-            this._chatSessions = JSON.parse(localStorage.getItem("chatSessions") || "{}");
+            this._appId = this.getOwnerComponent().getManifestEntry("sap.app").id;
+            this._storageKey = this._appId + "_chatSessions";
+            this._chatSessions = JSON.parse(localStorage.getItem(this._storageKey) || "{}");
             this._sessionId = null;
             this._newSessionFlags = {};
 
@@ -35,6 +37,14 @@ sap.ui.define([
             bus.subscribe("chat", "loadSession", this._onLoadSession, this);
             bus.subscribe("chat", "resetChatContainer", this._onResetChat, this);
             bus.subscribe("chat", "loadSessionWithText", this._onLoadSessionWithText, this);
+
+            var oInput = this.byId("messageInput");
+            oInput.attachBrowserEvent("keydown", function (oEvent) {
+                if (oEvent.key === "Enter" && !oEvent.shiftKey) {
+                    oEvent.preventDefault(); 
+                    this.onSend();          
+                }
+            }.bind(this));
         },
 
         _onResetChat() {
@@ -121,7 +131,7 @@ sap.ui.define([
 
             // If no active session, create a real session now
             if (!this._sessionId) {
-                this._sessionId = "session_" + Date.now();
+                this._sessionId = this._appId + "_" + Date.now();
                 this._chatSessions[this._sessionId] = { title: "", messages: [] };
                 this._newSessionFlags[this._sessionId] = true;
             }
@@ -208,7 +218,7 @@ sap.ui.define([
         },
 
         _saveSessions() {
-            localStorage.setItem("chatSessions", JSON.stringify(this._chatSessions));
+            localStorage.setItem(this._storageKey, JSON.stringify(this._chatSessions));
             sap.ui.getCore().getEventBus().publish("chat", "sessionUpdated");
         },
 
