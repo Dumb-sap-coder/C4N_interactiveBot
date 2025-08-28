@@ -30,6 +30,106 @@ sap.ui.define([
                     altime: "11:15:12",
                     aluser: "RFCUSER",
                     text: "Customer BPUS21 does not exist (please change entry in plant US21)"
+                },
+                {
+                    lognumber: "00000000000001118631",
+                    object: "/MM/PUR",
+                    subobject: "PO_PROCESS",
+                    extnumber: "MAT191",
+                    aldate: "2025-08-20",
+                    altime: "09:15:10",
+                    aluser: "PURUSER",
+                    text: "Account assignment mandatory for material 191 (enter acc. ass. cat.)"
+                },
+                {
+                    lognumber: "00000000000001118632",
+                    object: "/MM/PLANT",
+                    subobject: "MATERIAL",
+                    extnumber: "MAT191",
+                    aldate: "2025-08-20",
+                    altime: "10:05:44",
+                    aluser: "PURUSER",
+                    text: "Material 191 not maintained in plant LHMP"
+                },
+                {
+                    lognumber: "00000000000001118633",
+                    object: "/MM/SUPPLIER",
+                    subobject: "VENDOR",
+                    extnumber: "SUP100168",
+                    aldate: "2025-08-20",
+                    altime: "11:12:35",
+                    aluser: "PURUSER",
+                    text: "Supplier 100168 has not been created for purchasing organization 7050"
+                },
+                {
+                    lognumber: "00000000000001118634",
+                    object: "/MM/ORG",
+                    subobject: "CONFIG",
+                    extnumber: "PORG7050",
+                    aldate: "2025-08-21",
+                    altime: "08:45:20",
+                    aluser: "ADMUSER",
+                    text: "Company code 0001 not defined for purchasing organization 7050"
+                },
+                {
+                    lognumber: "00000000000001118635",
+                    object: "/SD/PRICING",
+                    subobject: "COND",
+                    extnumber: "ZPIO",
+                    aldate: "2025-08-21",
+                    altime: "09:20:41",
+                    aluser: "SDUSER",
+                    text: "Condition ZPIO is missing in pricing procedure A M RM0000"
+                },
+                {
+                    lognumber: "00000000000001118636",
+                    object: "/SD/CUSTOMER",
+                    subobject: "MASTER",
+                    extnumber: "BP5507",
+                    aldate: "2025-08-21",
+                    altime: "10:05:18",
+                    aluser: "SDUSER",
+                    text: "Sold-to party 5507 not maintained for sales area DEZ1 01 01"
+                },
+                {
+                    lognumber: "00000000000001118637",
+                    object: "/SD/ORDER",
+                    subobject: "SALES",
+                    extnumber: "ORD123456",
+                    aldate: "2025-08-21",
+                    altime: "10:42:50",
+                    aluser: "SDUSER",
+                    text: "Order is incomplete - maintain the order"
+                },
+                {
+                    lognumber: "00000000000001118638",
+                    object: "/SD/DELIVERY",
+                    subobject: "CHECK",
+                    extnumber: "ORD123456",
+                    aldate: "2025-08-21",
+                    altime: "11:12:22",
+                    aluser: "SDUSER",
+                    text: "Order cannot be delivered (see long text)"
+                },
+                {
+                    lognumber: "00000000000001118639",
+                    object: "/SD/DELIVERY",
+                    subobject: "SPLIT",
+                    extnumber: "ITEM000010",
+                    aldate: "2025-08-21",
+                    altime: "11:30:15",
+                    aluser: "SDUSER",
+                    text: "Item 000010: delivery split because of different shipping points"
+                },
+                {
+                    lognumber: "00000000000001118640",
+                    object: "/MM/SCHED",
+                    subobject: "DELIVERY",
+                    extnumber: "SCHED001",
+                    aldate: "2025-08-21",
+                    altime: "11:55:47",
+                    aluser: "PURUSER",
+                    text: "No schedule lines due for delivery up to selected date"
                 }
             ];
 
@@ -49,7 +149,7 @@ sap.ui.define([
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
             // Navigate to the Chatbot view
-            oRouter.navTo("chatbot"); 
+            oRouter.navTo("chatbot");
 
             // After navigation, delay EventBus publish slightly
             const bus = sap.ui.getCore().getEventBus();
@@ -62,7 +162,7 @@ sap.ui.define([
                         text: oData.text,
                         rowData: oData
                     });
-                }, 300); 
+                }, 300);
             } else {
                 setTimeout(() => {
                     bus.publish("chat", "resetChatContainer");
@@ -126,7 +226,7 @@ sap.ui.define([
 
             const oTable = this.byId("worklistTable");
             const oBinding = oTable.getBinding("rows");
-            oBinding.filter([]); 
+            oBinding.filter([]);
         }
 
     });

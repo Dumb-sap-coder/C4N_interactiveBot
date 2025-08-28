@@ -38,11 +38,15 @@ sap.ui.define([
             bus.subscribe("chat", "resetChatContainer", this._onResetChat, this);
             bus.subscribe("chat", "loadSessionWithText", this._onLoadSessionWithText, this);
 
+            this._isBotResponding = false;  // track bot response status
+
             var oInput = this.byId("messageInput");
             oInput.attachBrowserEvent("keydown", function (oEvent) {
                 if (oEvent.key === "Enter" && !oEvent.shiftKey) {
-                    oEvent.preventDefault(); 
-                    this.onSend();          
+                    oEvent.preventDefault();
+                    if (!this._isBotResponding) {   // only allow send if bot is free
+                        this.onSend();
+                    }
                 }
             }.bind(this));
         },
@@ -122,6 +126,7 @@ sap.ui.define([
         },
 
         onSend() {
+            if (this._isBotResponding) return;
             const oInput = this.getView().byId("messageInput");
             const sMessage = oInput.getValue().trim();
             if (!sMessage) {
@@ -141,6 +146,7 @@ sap.ui.define([
             this._addMessage(sMessage, "user", activeSessionId);
 
             const thinking = this._showBotThinking();
+            this._isBotResponding = true;
 
             fetch(URLS.normalQuery, {
                 method: "POST",
@@ -162,11 +168,13 @@ sap.ui.define([
                     } catch (e) { }
 
                     this._addMessage(botReply, "bot", activeSessionId);
+                    this._isBotResponding = false;
                 })
                 .catch(() => {
                     this.byId("chatMessagesBox").removeItem(thinking.container);
                     this._addMessage("⚠️ Unable to reach the bot. Please try again.", "bot", activeSessionId);
                     this.byId("sendButton").setEnabled(true);
+                    this._isBotResponding = false;
                 });
 
             oInput.setValue("");
